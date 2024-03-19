@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .upper{
+      background-color: rgb(232, 238, 240);
+      border-radius: 10px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+      overflow: auto;
+      margin-top: 20px;
+      height: 120px;
+      padding: 10px;
+    }
+
+    .lower {
+      background-color: rgb(232, 238, 240);
+      border-radius: 10px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+      overflow: auto;
+      margin-top: 20px;
+      height: auto;
+      padding: 10px;
+    }
+        nav {
+            display: flex;
+            height: 80px;
+            width: 100%;
+            background-color: #22196b;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px 0 100px;
+            flex-wrap: wrap;
+        }
+
+        nav .logo {
+      margin-left: -50px;
+      /* height: 60px;
+      width: 140px; */
+    }
+
+        nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+        nav ul li {
+            margin: 0 5px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 8px 15px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            color: white;
+            background: red;
+        }
+
+        nav .menu-btn i {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        @media (max-width: 1000px) {
+            nav {
+                padding: 0 40px 0 50px;
+            }
+        }
+
+        @media (max-width: 920px) {
+            nav .menu-btn i {
+                display: block;
+            }
+
+            #click:checked~.menu-btn i:before {
+                content: "\f00d";
+            }
+
+            nav ul {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        background: #22196b;
+        height: 53%;
+        width: 100%;
+        text-align: center;
+        display: block;
+        transition: all 0.3s ease;
+        z-index: 1;
+      }
+
+
+            #click:checked~ul {
+                left: 0;
+            }
+
+            nav ul li {
+                width: 100%;
+                margin: 20px 0;
+            }
+
+            nav ul li a {
+                width: 100%;
+                margin-left: -100%;
+                display: block;
+                font-size: 20px;
+            }
+
+            #click:checked~ul li a {
+                margin-left: 0px;
+            }
+
+            nav ul li a.active,
+            nav ul li a:hover {
+                background: none;
+                color: red;
+            }
+        }
+
+        #Profile button {
+            background-color: rgb(30, 30, 132);
+            color: white;
+            font-size: 15px;
+            padding: 6px;
+            border: 2px solid #e0e0e0;
+            margin-left: 10px;
+            margin-top: 5px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url(background.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+                0 10px 10px rgba(0, 0, 0, 0.22);
+            position: relative;
+            overflow: hidden;
+            width: 600px;
+            height: 400px;
+            margin: auto;
+            margin-top: 80px;
+        }
+
+        .left {
+            background: linear-gradient(to right, rgb(30, 30, 132), #2b1653);
+            color: #FFFFFF;
+            position: absolute;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 35%;
+
+        }
+
+        .card {
+            position: absolute;
+            left: 35%;
+            width: 65%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #FFFFFF;
+        }
+
+        .heading {
+            font-size: 23px;
+            line-height: 2;
+            margin: 18px;
+            font-weight: 500;
+        }
+
+
+
+        .left img {
+            border-radius: 5px;
+            height: 120px;
+            margin-top: -30px;
+        }
+
+        .left p {
+            font-size: 28px;
+            text-align: center;
+            color: white;
+            margin: 20px;
+        }
+
+        .left h5 {
+            margin-top: -10px;
+            color: rgba(255, 255, 255, 0.84);
+            font-size: 18px;
+            text-align: center;
+        }
+
+        input {
+            margin: 10px;
+            display: block;
+            margin-block-start: 1em;
+            padding: 8px;
+            font-size: 14px;
+            color: #212529;
+            margin-left: 15px;
+        }
+
+        #update {
+            margin: 15px;
+            display: block;
+            margin-block-start: 1em;
+            padding: 5px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #22196b;
+        }
+
+
+        #eye1 {
+            position: absolute;
+            bottom: 40%;
+            right: 25%;
+            color: rgb(135, 151, 185);
+            cursor: pointer;
+        }
+        #eye2{
+            position: absolute;
+            bottom: 27.5%;
+            right: 25%;
+            color: rgb(135, 151, 185);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+   
+      <nav>
+        <img src="finalLogo.png" class="logo">
+        <input type="checkbox" id="click">
+        <label for="click" class="menu-btn">
+            <i class="fa fa-fw fa-bars"></i>
+        </label>
+        <ul>
+            <li><a href="http://localhost:3000/user-profile"><i class="fa fa-fw fa-user"></i>Profile</a></li>
+            <li><a href="http://localhost:3000/mydevices"><i class="fa fa-fw fa-mobile"></i>My Devices</a></li>
+            <li><a href="http://localhost:3000/graph"><i class="fa fa-fw fa-line-chart"></i>Graphs</a></li>
+            <li>
+                <div>
+                    <form id="Profile" action="/logout" method="GET" enctype="text/plain">
+                        <button>Logout</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="left" align="center">
+            <img src="logo2.jpg">
+            <p>TechAsia Mechatronics </p>
+            <h5>admin</h5>
+        </div>
+
+        <div class="card" align="center">
+            <h class="heading">Update Profile</h>
+            <hr>
+            <form action="/user-changeDetails" method="GET" enctype="text/plain">
+                <input type="text" placeholder="Name" id="name" />
+                <input type="email" placeholder="Email" id="email" />
+                <input type="number" placeholder="Phone Number" id="phone">
+                <input type="password" placeholder="Password" id="newPassword" />
+                <i class="fa solid fa-eye" id="eye1"></i>
+                <input type="password" placeholder="Confirm Password" id="repeatPassword">
+                <i class="fa solid fa-eye" id="eye2"></i>
+                <button id="update">
+                    Update
+                </button>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        function sendMail() {
+            window.location = "mailto:info@techasiamechatronics@gmail.com";
+        }
+
+        document.getElementById("update").addEventListener("click", async function (event) {
+            const name1 = document.getElementById("name").value;
+            const email1 = document.getElementById("email").value;
+            const phone1 = document.getElementById("phone").value;
+            const newPassword = document.getElementById("newPassword").value;
+            const repeatPassword = document.getElementById("repeatPassword").value;
+            console.log(phone1.length)
+
+            if (phone1.length !== 10 && phone1.length !== 0) {
+                event.preventDefault(); // Prevent form submission
+                alert("Phone number should be 10 digits.");
+            }
+            else if (phone1.length == 10 || phone1.length == 0) {
+                if (newPassword == repeatPassword) {
+                    fetch(`http://localhost:3000/user-changeDetails?name=${name1}&email=${email1}&phone=${phone1}&newPassword=${newPassword}&repeatPassword=${repeatPassword}`, {
+                        method: "POST", // Replace with the appropriate HTTP method
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Handle the API response data
+                            console.log("Hulloo")
+                            console.log(data);
+                        })
+                        .catch(error => {
+                            // Handle any errors that occurred during the API request
+                            console.log("Bubyee")
+
+                            console.error(error);
+                        });
+                }
+                else {
+                    let conf = confirm("Please recheck password");
+                }
+            }
+
+        });
+
+        const eye1 = document.getElementById('eye1');
+        const passwordInput = document.getElementById('newPassword');
+
+        eye1.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            eye1.classList.toggle('fa-eye');
+            eye1.classList.toggle('fa-eye-slash');
+        });
+
+        const eye2 = document.getElementById('eye2');
+        const repeatPasswordInput = document.getElementById('repeatPassword');
+
+        eye2.addEventListener('click', function () {
+            const type = repeatPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            repeatPasswordInput.setAttribute('type', type);
+
+            eye2.classList.toggle('fa-eye');
+            eye2.classList.toggle('fa-eye-slash');
+        });
+
+
+    </script>
+</body>
+
+</html>

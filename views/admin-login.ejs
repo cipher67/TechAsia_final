@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<title>Admin-Login</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Inter', sans-serif;
+			background-image: url(background.png);
+			background-repeat: no-repeat;
+			background-size: cover;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			height: 100vh;
+		}
+
+		p {
+			font-size: 14px;
+			font-weight: 100;
+			line-height: 20px;
+			letter-spacing: 0.5px;
+			margin: 20px 0 30px;
+		}
+
+		a {
+			color: #0a44b9;
+			font-size: 14px;
+			text-decoration: none;
+			margin: 15px 0;
+		}
+
+		button {
+			border-radius: 20px;
+			border: 1px solid #22196b;
+			background-color: #3c1a79;
+			color: #FFFFFF;
+			font-size: 12px;
+			padding: 12px 24px;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
+
+		button:active {
+			transform: scale(0.95);
+		}
+
+		button:focus {
+			outline: none;
+		}
+
+		form {
+			background-color: #FFFFFF;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			padding: 0 50px;
+			height: 100%;
+			text-align: center;
+		}
+
+		input,
+		#password {
+			background-color: #eee;
+			border: none;
+			padding: 12px 15px;
+			margin: 8px 0;
+			width: 120%;
+		}
+
+		.container {
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+				0 10px 10px rgba(0, 0, 0, 0.22);
+			position: relative;
+			overflow: hidden;
+			width: 768px;
+			max-width: 100%;
+			min-height: 480px;
+		}
+
+		.form-container {
+			position: absolute;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			width: 50%;
+		}
+
+		.overlay-container {
+			position: absolute;
+			left: 50%;
+			width: 50%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		.overlay {
+			background: linear-gradient(to right, rgb(30, 30, 132), #2b1653);
+			color: #FFFFFF;
+			position: absolute;
+			left: -100%;
+			height: 100%;
+			width: 200%;
+
+		}
+
+		.overlay-panel {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			padding: 0 40px;
+			text-align: center;
+			height: 100%;
+			width: 50%;
+
+		}
+
+		.overlay-right {
+			right: 0;
+			transform: translateX(0);
+		}
+
+		.fa-eye {
+			position: relative;
+			bottom: 7.5%;
+			left: 50%;
+			cursor: pointer;
+			color: rgb(135, 151, 185);
+		}
+
+		span {
+			font-size: 14px;
+		}
+		span1{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container" id="container">
+		<div class="form-container sign-in-container">
+
+			<form action="/admin-dashboard" method="GET" enctype="text/plain" onsubmit="return false;">
+				<h1>Login</h1>
+				<input type="text" placeholder="Username" id="username" required />
+				<input type="password" placeholder="Password" id="password" required>
+				<i class="fa-solid fa-eye" id="eye"></i>
+				<!-- <span1 for="rememberPassword">Remember Password <input type="checkbox"
+					id="rememberPassword"></span1> -->
+				<a href="">Forgot your password?</a>
+				<div class="btn">
+					<button id="login">Sign In</button>
+				</div>
+				<span>
+					<p>Are you an user? <a href="http://localhost:3000/register">Sign up as a User</a></p>
+				</span>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-right">
+					<h1>Admin</h1>
+					<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut ullam similique voluptatum minima?
+						Aperiam dolor, excepturi repellendus maiores aliquam numquam ut odio nostrum perferendis
+						consequatur, voluptatem ipsum delectus laudantium quia.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		document.getElementById("login").addEventListener("click", async function (event) {
+			const username1 = document.getElementById("username").value;
+			const password1 = document.getElementById("password").value;
+
+			fetch(`http://localhost:3000/admin?username=${username1}&password=${password1}`, {
+				method: "POST", // Replace with the appropriate HTTP method
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+				.then(response => response.json())
+				.then(data => {
+					// Handle the API response data
+					// console.log("Hulloo")
+					// console.log(data);
+					window.location='/admin-dashboard';
+				})
+				.catch(error => {
+					// Handle any errors that occurred during the API request
+					// console.log("Bubyee")
+
+					// console.error(error);
+					window.location='/admin-dashboard';
+				});
+
+		});
+		const passwordInput = document.querySelector("#password")
+		const eye = document.querySelector("#eye")
+		eye.addEventListener("click", function () {
+			this.classList.toggle("fa-eye-slash")
+			const type = passwordInput.getAttribute("type") === "password" ? "text" : "password"
+			passwordInput.setAttribute("type", type)
+		});
+		// function savePassword() {
+		// 				const passwordInput = document.getElementById("password");
+		// 				const rememberCheckbox = document.getElementById("rememberPassword");
+
+		// 				if (rememberCheckbox.checked) {
+		// 					const password = passwordInput.value;
+		// 					localStorage.setItem("rememberedPassword", password);
+		// 				}
+		// 			}
+
+		// 			// Function to load the saved password from localStorage and autofill the password field
+		// 			function loadPassword() {
+		// 				const passwordInput = document.getElementById("password");
+		// 				const rememberedPassword = localStorage.getItem("rememberedPassword");
+
+		// 				if (rememberedPassword) {
+		// 					passwordInput.value = rememberedPassword;
+		// 				}
+		// 			};
+		// 			window.addEventListener("load", loadPassword);
+
+		const alert='<%-alert%>'
+					if(alert=='true'){
+						let conf=confirm("Please enter Valid Credentials")
+					}
+	</script>
+</body>
+
+</html>

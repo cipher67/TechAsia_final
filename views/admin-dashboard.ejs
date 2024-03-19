@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Admin-Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    nav {
+      display: flex;
+      height: 80px;
+      width: 100%;
+      background-color: #22196b;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 50px 0 100px;
+      flex-wrap: wrap;
+    }
+
+    nav .logo {
+      margin-left: -50px;
+      /* height: 60px;
+      width: 140px; */
+    }
+
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 5px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+      color: white;
+      background: red;
+    }
+
+    nav .menu-btn i {
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    @media (max-width: 1000px) {
+      nav {
+        padding: 0 40px 0 50px;
+      }
+    }
+
+    @media (max-width: 920px) {
+      nav .menu-btn i {
+        display: block;
+      }
+
+      #click:checked~.menu-btn i:before {
+        content: "\f00d";
+      }
+
+      nav ul {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        background: #22196b;
+        height: 53%;
+        width: 100%;
+        text-align: center;
+        display: block;
+        transition: all 0.3s ease;
+        z-index: 1;
+      }
+
+      #click:checked~ul {
+        left: 0;
+      }
+
+      nav ul li {
+        width: 100%;
+        margin: 20px 0;
+      }
+
+      nav ul li a {
+        width: 100%;
+        margin-left: -100%;
+        display: block;
+        font-size: 20px;
+        padding: 20px;
+      }
+
+      #click:checked~ul li a {
+        margin-left: 0px;
+      }
+
+      nav ul li a.active,
+      nav ul li a:hover {
+        background: none;
+        color: red;
+      }
+    }
+
+    .dropdown2 {
+      float: right;
+      font-size: 20px;
+    }
+
+
+    .dropdown2 .dropbtn2 {
+      font-size: 20px;
+      border: none;
+      outline: none;
+      color: white;
+      padding: 20px;
+      background-color: inherit;
+      font-family: 'Inter', sans-serif;
+      display: block;
+    }
+
+    .dropdown2:hover {
+      background-color: red;
+    }
+
+    .dropbtn2 {
+      background-color: none;
+      color: red;
+    }
+
+    .dropdown-content2 {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      min-width: 146px;
+      border: solid 1px;
+    }
+
+    .dropdown-content2 a {
+      float: none;
+      color: black;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      font-size: 20px;
+      padding: 12px 12px;
+    }
+
+
+    .dropdown-content2 a:hover {
+      background-color: #ddd;
+      padding: 12px 12px;
+    }
+
+    .dropdown2:hover .dropdown-content2 {
+      display: block;
+    }
+
+    #logout {
+      font-size: 15px;
+      background-color: #22196b;
+      color: white;
+      cursor: pointer;
+      margin-left: -30px;
+    }
+
+    .upper {
+      background-color: rgb(232, 238, 240);
+      border-radius: 10px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+      position: relative;
+      margin-top: 12px;
+      overflow: hidden;
+      min-height: 120px;
+      max-height: 120px;
+      padding: 10px;
+    }
+
+    .upper h2 {
+      color: black;
+      margin-top: 10px;
+      font-size: 20px;
+    }
+
+    .lower {
+      background-color: rgb(232, 238, 240);
+      border-radius: 10px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+      position: relative;
+      overflow: auto;
+      margin-top: 20px;
+      height: auto;
+      padding: 10px;
+    }
+
+    #registration {
+      font-family: 'Inter', sans-serif;
+      border-collapse: collapse;
+      overflow: hidden;
+      width: 100%;
+      font-size: 13px;
+    }
+
+    #registration td,
+    #registration th {
+      border: 1px solid #ddd;
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    #registration tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    #registration tr:hover {
+      background-color: #ddd;
+    }
+
+    #registration th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #233789;
+      color: white;
+    }
+
+    #delete {
+      color: red;
+      cursor: pointer;
+    }
+
+    #search1 {
+      padding: 10px;
+      margin-top: 14px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      border: 1.5px solid #22196b;
+    }
+
+    #button {
+      padding: 9.5px;
+      border: 2px solid #22196b;
+      margin-top: 3.5px;
+      font-size: 15px;
+      background-color: #22196b;
+      color: white;
+      cursor: pointer;
+    }
+
+    #graph,
+    #activity {
+      border: 2px solid #22196b;
+      background-color: #22196b;
+      color: white;
+      cursor: pointer;
+      font-size: 13px;
+
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <img src="finalLogo.png" class="logo">
+    <input type="checkbox" id="click">
+    <label for="click" class="menu-btn">
+      <i class="fa fa-fw fa-bars"></i>
+    </label>
+    <ul>
+      <li><a href="http://localhost:3000/admin-dashboard"><i class="fa fa-fw fa-search"></i> Users Data</a></li>
+      <li><a href="http://localhost:3000/admin-activity"><i class="fa fa-fw fa-calculator"></i> Activity</a></li>
+      <li><a href="http://localhost:3000/register"><i class="fa fa-fw fa-users"></i> Add User</a></li>
+    </ul>
+    <div class="dropdown2">
+      <button class="dropbtn2" id="activity2"><i class="fa fa-fw fa-user"></i> Admin
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content2">
+        <a href="http://localhost:3000/admin-profile">Profile</a>
+        <a href="http://localhost:3000/admin-registration">New Admin</a>
+        <a href="#">
+          <form id="Profile" action="/logout" method="GET" enctype="text/plain">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="logout">Logout</button>
+          </form>
+        </a>
+  </nav>
+
+
+
+  <div class="upper" align="center">
+    <h2>USER DATA INFORMATION</h2>
+    <input type="text" id="search1" placeholder="Email">
+    <button type="search" id="button" onclick="myFunction1()">Search</button>
+  </div>
+  <div class="lower">
+    <br>
+    <table class="table" id="registration">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Activity</th>
+          <th>Graph</th>
+          <th>Function</th>
+        </tr>
+      </thead>
+
+        <tbody>
+          <% users.forEach(function(user, index) { %>
+            <tr>
+              <td>
+                <%= index + 1 %>
+              </td>
+              <td>
+                <%= user.name %>
+              </td>
+              <td>
+                <%= user.email %>
+              </td>
+              <td>
+                <%= user.phone %>
+              </td>
+              <td>
+                <div style="text-align:center;">
+                  <form action="/admin-viewActivity?email=<%= user.email %>" method="POST">
+                    <button onclick="viewActivity(this)" email="<%= user.email %>" id="activity">Activity</button>
+                  </form>
+                </div>
+              </td>
+              <td>
+                <div style="text-align:center;">
+                  <form action="/admin-graph?email=<%= user.email %>" method="POST">
+                    <button onclick="viewGraph(this)" email="<%= user.email %>" id="graph">Graph</button>
+                  </form>
+                </div>
+              </td>
+              <td>
+                <a class='btn btn-danger btn-sm deleteButton' onclick="deleteUser(this)" email="<%= user.email %>"
+                  id="delete">Delete</a>
+              </td>
+            </tr>
+            <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function viewActivity() {
+      fetch(`http://localhost:3000/admin-viewActivity?email=${userEmail}`, {
+        method: "GET", // Replace with the appropriate HTTP method
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          // Handle any errors that occurred during the API request
+          console.error(error);
+        });
+    }
+    function viewGraph(button) {
+      var userEmail = button.getAttribute("email")
+      fetch(`http://localhost:3000/admin-graph?email=${userEmail}`, {
+        method: "GET", // Replace with the appropriate HTTP method
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          // Handle any errors that occurred during the API request
+          console.error(error);
+        });
+    };
+    function deleteUser(button) {
+
+      let conf = confirm("Are you sure you want to Delete?\n")
+      console.log(conf)
+      if (conf == true) {
+        let conf1 = confirm("Your Data will be lost Permanently")
+        if(conf1==true){
+
+        var deleteUser = button.getAttribute("email")
+        fetch(`http://localhost:3000/delete?email=${deleteUser}`, {
+          method: "POST", // Replace with the appropriate HTTP method
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            var rowToRemove = button.closest("tr");
+            rowToRemove.remove();
+            console.log(data);
+          })
+          .catch(error => {
+            // Handle any errors that occurred during the API request
+            console.error(error);
+          });
+        }
+      }
+    };
+    function myFunction1() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("search1");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("registration");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[2];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    };
+
+    document.getElementById("Profile").addEventListener("click", async function (event) {
+
+      fetch(`http://localhost:3000/logout`, {
+        method: "POST", // Replace with the appropriate HTTP method
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          // // Handle the API response data
+          // console.log("Hulloo")
+          console.log("Tata");
+        })
+        .catch(error => {
+          // // Handle any errors that occurred during the API request
+          console.log("Bubyee Error")
+
+          console.error(error);
+        });
+    })
+
+  </script>
+</body>
+
+</html>

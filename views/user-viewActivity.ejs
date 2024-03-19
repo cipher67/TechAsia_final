@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    nav {
+      display: flex;
+      height: 80px;
+      width: 100%;
+      background-color: #22196b;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 50px 0 100px;
+      flex-wrap: wrap;
+    }
+
+    nav .logo {
+      margin-left: -50px;
+      /* height: 60px;
+      width: 140px; */
+    }
+
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 5px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      padding: 8px 15px;
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+      color: white;
+      background: red;
+    }
+
+    nav .menu-btn i {
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    @media (max-width: 1000px) {
+      nav {
+        padding: 0 40px 0 50px;
+      }
+    }
+
+    @media (max-width: 920px) {
+      nav .menu-btn i {
+        display: block;
+      }
+
+      #click:checked~.menu-btn i:before {
+        content: "\f00d";
+      }
+
+      nav ul {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        background: #22196b;
+        height: 53%;
+        width: 100%;
+        text-align: center;
+        display: block;
+        transition: all 0.3s ease;
+        z-index: 1;
+      }
+
+      #click:checked~ul {
+        left: 0;
+      }
+
+      nav ul li {
+        width: 100%;
+        margin: 20px 0;
+      }
+
+      nav ul li a {
+        width: 100%;
+        margin-left: -100%;
+        display: block;
+        font-size: 20px;
+      }
+
+      #click:checked~ul li a {
+        margin-left: 0px;
+      }
+
+      nav ul li a.active,
+      nav ul li a:hover {
+        background: none;
+        color: red;
+      }
+    }
+
+    #Profile button {
+      background-color: rgb(30, 30, 132);
+      color: white;
+      font-size: 15px;
+      padding: 6px;
+      border: 2px solid #e0e0e0;
+      margin-left: 10px;
+      margin-top: 5px;
+    }
+    .upper{
+      background-color: rgb(232, 238, 240);
+      border-radius: 10px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+      overflow: auto;
+      margin-top: 20px;
+      height: 120px;
+      padding: 10px;
+    }
+
+    .lower {
+      background-color: rgb(232, 238, 240);
+      border-radius: 10px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+      overflow: auto;
+      margin-top: 20px;
+      height: auto;
+      padding: 10px;
+    }
+
+
+    #registration {
+      font-family: 'Inter', sans-serif;
+      border-collapse: collapse;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #registration td,
+    #registration th {
+      border: 2px solid #ddd;
+      padding: 8px;
+      overflow: auto;
+      font-size: 13px;
+
+    }
+
+    #registration tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    #registration tr:hover {
+      background-color: #ddd;
+    }
+
+    #registration th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #233789;
+      color: white;
+    }
+    
+    .upper h2 {
+      text-align: center;
+      color: black;
+      margin-top: 3px;
+      font-size: 25px;
+    }
+    #searchDateButton {
+      padding: 7px;
+      border: 2px solid #22196b;
+      margin-top: 15px;
+      font-size: 15px;
+      background-color: #22196b;
+      color: white;
+      cursor: pointer;
+    }
+
+    #searchDate {
+      border: 1.5px solid #22196b;
+      padding: 7.8px;
+      margin-top: 10px;
+      align-items: center;
+      font-size: 13px;
+			font-family: 'Inter', sans-serif;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <nav>
+    <img src="finalLogo.png" class="logo">
+    <input type="checkbox" id="click">
+    <label for="click" class="menu-btn">
+      <i class="fa fa-fw fa-bars"></i>
+    </label>
+    <ul>
+      <li><a href="http://localhost:3000/user-profile"><i class="fa fa-fw fa-user"></i>Profile</a></li>
+      <li><a href="http://localhost:3000/dashboard"><i class="fa fa-fw fa-calculator"></i>Activity</a></li>
+      <li><a href="http://localhost:3000/mydevices"><i class="fa fa-fw fa-mobile"></i>My Devices</a></li>
+      <li><a href="http://localhost:3000/graph"><i class="fa fa-fw fa-line-chart"></i>Graphs</a></li>
+      <li>
+        <div align="center">
+          <form id="Profile" action="/logout" method="GET" enctype="text/plain">
+            <button>Logout</button>
+          </form>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <div class="container">
+    <div class="upper" align="center">
+      <h2>Search By Date</h2>
+      <!-- <form action="/view-activity" method="POST"> -->
+        <input type="date" id="searchDate" placeholder="Date" />
+        <button type="submit" class="btn btn-primary" id="searchDateButton" onclick="myFunction1()">
+          <i class="fa fa-fw fa-search"></i>
+        </button>
+      <!-- </form> -->
+    </div>
+    <div class="lower">
+      <table class="table" id="registration">
+        <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>MAC ID</th>
+            <th>Count</th>
+            <th>Session Duration</th>
+            <th>Date(YYYY-MM-DD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(function(user, index) { %>
+            <tr>
+              <td>
+                <%= index + 1 %>
+              </td>
+              <td>
+                <%= user.mac_id %>
+              </td>
+              <td>
+                <%= user.count %>
+              </td>
+              <td>
+                <%= user.session_time %>
+              </td>
+             
+              <!-- <td>
+                <%= user.date.toISOString().split('T')[0] %>
+              </td> -->
+              <td>
+                <%= new Date(user.date.getTime() + (24 * 60 * 60 * 1000)).toISOString().split('T')[0] %>
+              </td>              
+            </tr>
+            <% }); %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById("Profile").addEventListener("click", async function (event) {
+
+      fetch(`http://localhost:3000/logout`, {
+        method: "POST", // Replace with the appropriate HTTP method
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          // // Handle the API response data
+          // console.log("Hulloo")
+          console.log("Tata");
+        })
+        .catch(error => {
+          // // Handle any errors that occurred during the API request
+          console.log("Bubyee Error")
+
+          console.error(error);
+        });
+    });
+
+    function myFunction1() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("searchDate");
+      filter = input.value.toUpperCase();
+      console.log(filter)
+      table = document.getElementById("registration");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[4];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    };
+  </script>
+
+</body>
+
+</html>

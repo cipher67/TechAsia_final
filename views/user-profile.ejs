@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        nav {
+            display: flex;
+            height: 80px;
+            width: 100%;
+            background-color: #22196b;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px 0 100px;
+            flex-wrap: wrap;
+        }
+        nav .logo {
+      margin-left: -50px;
+      /* height: 60px;
+      width: 140px; */
+    }
+
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 5px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 8px 15px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            color: white;
+            background: red;
+        }
+
+        nav .menu-btn i {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        @media (max-width: 1000px) {
+            nav {
+                padding: 0 40px 0 50px;
+            }
+        }
+
+        @media (max-width: 920px) {
+            nav .menu-btn i {
+                display: block;
+            }
+
+            #click:checked~.menu-btn i:before {
+                content: "\f00d";
+            }
+
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                background: #22196b;
+                height: 53%;
+                width: 100%;
+                text-align: center;
+                display: block;
+                transition: all 0.3s ease;
+                z-index: 1;
+            }
+
+            #click:checked~ul {
+                left: 0;
+            }
+
+            nav ul li {
+                width: 100%;
+                margin: 20px 0;
+            }
+
+            nav ul li a {
+                width: 100%;
+                margin-left: -100%;
+                display: block;
+                font-size: 20px;
+            }
+
+            #click:checked~ul li a {
+                margin-left: 0px;
+            }
+
+            nav ul li a.active,
+            nav ul li a:hover {
+                background: none;
+                color: red;
+            }
+        }
+
+        #Profile button {
+            background-color: rgb(30, 30, 132);
+            color: white;
+            font-size: 15px;
+            padding: 6px;
+            border: 2px solid #e0e0e0;
+            margin-left: 10px;
+            margin-top: 5px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url(background.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+                0 10px 10px rgba(0, 0, 0, 0.22);
+            position: relative;
+            overflow: hidden;
+            width: 600px;
+            height: 400px;
+            margin: auto;
+            margin-top: 80px;
+        }
+
+        .left {
+            background: linear-gradient(to right, rgb(30, 30, 132), #2b1653);
+            color: #FFFFFF;
+            position: absolute;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 35%;
+
+        }
+
+        .card {
+            position: absolute;
+            left: 35%;
+            width: 65%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #FFFFFF;
+        }
+
+        .heading {
+            font-size: 23px;
+            line-height: 2;
+            margin: 18px;
+            font-weight: 500;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            font-weight: 500;
+            line-height: 1.5;
+            color: #212529;
+            text-align: left;
+            padding-left: 1.25rem;
+            padding-bottom: 1.25rem;
+            margin: 10px;
+        }
+
+        .card h5 {
+            color: gray;
+        }
+
+
+        .card p {
+            line-height: 2px;
+            margin: 20px;
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-size: 18px;
+            color: #212529;
+        }
+
+        .column-left {
+            float: left;
+            display: block;
+            width: 48%;
+        }
+
+        .column-right {
+            float: right;
+            display: block;
+            width: 48%;
+        }
+
+        .social-link li {
+            display: inline-block;
+        }
+
+        .social-link li a {
+            font-size: 20px;
+            margin: 0px 0px 0px 20px;
+        }
+
+        .change {
+            color: #fff;
+            background-color: #22196b;
+            margin: 20px;
+            border: 2px solid #22196b;
+            display: inline-block;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-size: medium;
+        }
+
+        .left img {
+            border-radius: 5px;
+            height: 120px;
+            margin-top: -30px;
+        }
+
+        .left p {
+            font-size: 28px;
+            text-align: center;
+            color: white;
+            margin: 20px;
+        }
+
+        .left h5 {
+            margin-top: -10px;
+            color: rgba(255, 255, 255, 0.84);
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <img src="finalLogo.png" class="logo">
+        <input type="checkbox" id="click">
+        <label for="click" class="menu-btn">
+            <i class="fa fa-fw fa-bars"></i>
+        </label>
+        <ul>
+            <li><a href="http://localhost:3000/user-profile"><i class="fa fa-fw fa-user"></i>Profile</a></li>
+            <li><a href="http://localhost:3000/mydevices"><i class="fa fa-fw fa-mobile"></i>My Devices</a></li>
+            <li><a href="http://localhost:3000/graph"><i class="fa fa-fw fa-line-chart"></i>Graphs</a></li>
+            <li>
+                <div>
+                    <form id="Profile" action="/logout" method="GET" enctype="text/plain">
+                        <button>Logout</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="left" align="center">
+            <img src="logo2.jpg">
+            <p>TechAsia Mechatronics </p>
+            <h5>User</h5>
+        </div>
+
+        <div class="card">
+            <h class="heading">Your Details</h>
+            <hr>
+            <div class="row">
+                <div class="column-left">
+                    <% users.forEach(function(user) { %>
+                        <p class="title">Name</p>
+                        <h5 class="value">
+                            <%= user.name %>
+                        </h5>
+                </div>
+                <div class="column-right">
+                    <p class="title">Phone</p>
+                    <h5 class="value">
+                        <%= user.phone %>
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column-left"">
+                                    <p class=" title">E-mail</p>
+                    <h5 class="value">
+                        <%= user.email %>
+                    </h5>
+                </div>
+                <div class="column-right">
+                    
+                </div>
+                <% }); %>
+            </div>
+            <div class="links">
+                <ul class="social-link list-unstyled m-t-40 m-b-10">
+                    <li><a href="https://www.facebook.com/techAsiaMechatronics/" target="blank" data-toggle="tooltip"
+                            data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i
+                                class="mdi mdi-facebook feather icon-facebook " aria-hidden="true"></i></a></li>
+                    <li><a onclick="sendMail()" data-toggle="tooltip" target="blank" data-placement="bottom" title=""
+                            data-original-title="email" data-abc="true"><i class="mdi mdi-email feather icon-email "
+                                aria-hidden="true"></i></a></li>
+                    <li><a href="https://techasiamechatronics.com/" data-toggle="tooltip" target="blank"
+                            data-placement="bottom" title="" data-original-title="mdi-internet-explorer"
+                            data-abc="true"><i class="mdi mdi-internet-explorer feather icon-internet explorer "
+                                aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+            <a href="http://localhost:3000/user-changeDetails" class="change">Edit Profile</a>
+        </div>
+    </div>
+    <script>
+        function sendMail() {
+            window.location = "mailto:info@techasiamechatronics@gmail.com";
+        }
+        document.getElementById("Profile").addEventListener("click", async function (event) {
+
+fetch(`http://localhost:3000/logout`, {
+  method: "POST", // Replace with the appropriate HTTP method
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+  .then(response => response.json())
+  .then(data => {
+    // // Handle the API response data
+    // console.log("Hulloo")
+    console.log("Tata");
+  })
+  .catch(error => {
+    // // Handle any errors that occurred during the API request
+    console.log("Bubyee Error")
+
+    console.error(error);
+  });
+})
+    </script>
+</body>
+
+</html>
